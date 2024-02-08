@@ -1,16 +1,18 @@
 class zMedia {
   constructor({ audioTone = 'audio/bell.mp3' } = {}) {
     this.audioTone = audioTone;
+    this.audioMsg = new Audio(this.audioTone)
   }
 
   play() {
     if (navigator.userActivation.isActive) {
-      let audioMsg = new Audio(this.audioTone)
-      audioMsg.currentTime = 0;
-      audioMsg.play();
+      this.audioMsg.currentTime = 0;
+      this.audioMsg.play();
     }
   }
 }
+
+const zm = new zMedia();
 
 class Notification {
   constructor({ x = 'center', y = 'top', borderRadius = '100px', background = '#000', color = '#fff', styles = {}, options = {} } = {}) {
@@ -79,14 +81,12 @@ class Notification {
 
     notification.appendChild(notificationWrapper);
 
-    let zmedia = new zMedia({ audioTone: 'audio/bell.mp3' })
-    zmedia.play()
-    console.log('player');
+    zm.play();
+
 
     notificationWrapper.addEventListener('animationend', () => {
       setTimeout(() => {
         notificationWrapper.parentNode.removeChild(notificationWrapper);
-        zmedia = null;
       }, this.options.timeout)
     });
   }
@@ -159,7 +159,7 @@ class Notification {
                       justify-content: center;
                       align-items: ${this.x};
                       gap: 5px;
-                      padding: 10px;
+                      pointer-events: none;
                   }
 
                   #${this.containerid}.z-notify .z-notify-wrapper {
@@ -173,6 +173,7 @@ class Notification {
                       justify-content: center;
                       align-items: center;
                       gap: 10px;
+                      margin:10px 10px 0px 10px;
                       backdrop-filter: blur(6px);
                       -webkit-animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	                    animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -246,6 +247,16 @@ class Notification {
     var styleElement = document.createElement('style');
     styleElement.innerHTML = dynamicStyles;
     document.head.appendChild(styleElement);
+
+      // setInterval(() => {
+      //   let zContainer = document.getElementById(this.containerid);
+      //   if (zContainer.getElementsByClassName('z-notify-wrapper').length > 0) {
+      //     zContainer.style.dislay = 'none'
+      //   } else {
+      //     zContainer.style.dislay = 'flex'
+      //   }
+      //   console.log(zContainer);
+      // }, 300)
   }
 
 }
@@ -272,17 +283,9 @@ let notifyinit = {
 }
 
 const nf = new Notification(notifyinit);
-nf.notify('Welcome Back Sir', 'Zestlark', 'https://img.icons8.com/?size=48&id=16713&format=png')
+//nf.notify('Welcome Back Sir', 'Zestlark', 'https://img.icons8.com/?size=48&id=16713&format=png')
 
-const nf1 = new Notification({ x: 'left', y: 'bottom' });
-nf1.notify('Welcome Back Sirrrrrrrrrrrr', 'Zestlark', 'https://img.icons8.com/?size=48&id=16713&format=png')
-nf1.danger('deepak',)
-nf1.success('', 'test')
-
-console.log(nf);
-
-let n = 0
-setInterval(() => {
-  nf.danger('Welcome Back Sir' + n, 'Zestlark', 'https://img.icons8.com/?size=48&id=16713&format=png')
-  n++
-}, 10000)
+// const nf1 = new Notification({ x: 'left', y: 'bottom' });
+// nf1.notify('Welcome Back Sirrrrrrrrrrrr', 'Zestlark', 'https://img.icons8.com/?size=48&id=16713&format=png')
+// nf1.danger('deepak',)
+// nf1.success('', 'test')
