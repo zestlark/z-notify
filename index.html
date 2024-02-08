@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,44 @@
 
 <body>
     <br><br><br>
-    <button onclick="nf.notify('Welcome Back Sir', 'Zestlark','https://img.icons8.com/?size=48&id=16713&format=png')">clickmee</button>
+    <button
+        onclick="notify.notify('Welcome', 'Notification library by zestlark','https://img.icons8.com/?size=48&id=16713&format=png')">Welcome
+        Notify</button>
+
+    <button
+        onclick="notify.success('success', 'Notification library by zestlark','https://img.icons8.com/?size=48&id=16713&format=png')">success
+        Notify</button>
+
+    <button
+        onclick="notify.danger('Danger', 'Notification library by zestlark','https://img.icons8.com/?size=48&id=16713&format=png')">Danger
+        Notify</button>
 </body>
-<script src="index.js"></script>
+
+<script src="https://zestlark.github.io/z-notify/index.js"></script>
+
+<script>
+    notifyinit = {
+        x: 'end',
+        y: 'bottom',
+        borderRadius: '5px',
+        color: 'black',
+        background: 'white',
+        styles: {
+            danger: {
+                background: '#ff000044',
+                color: 'black'
+            },
+            success: {
+                background: '#00ff0044',
+                color: 'black'
+            }
+        },
+        options: {
+            timeout: 5000,
+            sound: 'https://zestlark.github.io/z-notify/audio/beep.mp3'
+        }
+    }
+    const notify = new Notification(notifyinit)
+</script>
 
 </html>

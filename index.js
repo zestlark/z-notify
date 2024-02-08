@@ -1,7 +1,7 @@
 class zMedia {
   constructor({ audioTone = 'audio/bell.mp3' } = {}) {
     this.audioTone = audioTone;
-    this.audioMsg = new Audio(this.audioTone)
+    this.audioMsg;
   }
 
   play() {
@@ -9,6 +9,10 @@ class zMedia {
       this.audioMsg.currentTime = 0;
       this.audioMsg.play();
     }
+  }
+
+  setAudio(url) {
+    this.audioMsg = new Audio(url)
   }
 }
 
@@ -36,12 +40,13 @@ class Notification {
       },
     };
     this.options = {
-      timeout: options?.timeout || 3000
+      timeout: options?.timeout || 3000,
+      sound: options?.sound || 'https://zestlark.github.io/z-notify/audio/bell.mp3'
     };
 
     this.containerid;
     this.NotifyHistory = []
-
+    zm.setAudio(this.options.sound)
     this.init();
   }
 
@@ -82,7 +87,6 @@ class Notification {
     notification.appendChild(notificationWrapper);
 
     zm.play();
-
 
     notificationWrapper.addEventListener('animationend', () => {
       setTimeout(() => {
@@ -248,15 +252,15 @@ class Notification {
     styleElement.innerHTML = dynamicStyles;
     document.head.appendChild(styleElement);
 
-      // setInterval(() => {
-      //   let zContainer = document.getElementById(this.containerid);
-      //   if (zContainer.getElementsByClassName('z-notify-wrapper').length > 0) {
-      //     zContainer.style.dislay = 'none'
-      //   } else {
-      //     zContainer.style.dislay = 'flex'
-      //   }
-      //   console.log(zContainer);
-      // }, 300)
+    // setInterval(() => {
+    //   let zContainer = document.getElementById(this.containerid);
+    //   if (zContainer.getElementsByClassName('z-notify-wrapper').length > 0) {
+    //     zContainer.style.dislay = 'none'
+    //   } else {
+    //     zContainer.style.dislay = 'flex'
+    //   }
+    //   console.log(zContainer);
+    // }, 300)
   }
 
 }
