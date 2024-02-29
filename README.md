@@ -9,6 +9,11 @@
 
 ## Getting Started
 
+Include the library:
+```HTML
+<script src="https://zestlark.github.io/z-notify/index.js"></script>
+```
+
 ```javascript
 // Initialize z-notify with optional configuration
 const notifyConfig = {
