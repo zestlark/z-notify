@@ -34,7 +34,7 @@ const notifyConfig = {
   },
   options: {
     timeout: 2000,
-    sound: 'path/to/your/audio/file.mp3'
+    sound: 'https://zestlark.github.io/z-notify/audio/beep.mp3'
   }
 };
 
